@@ -8,48 +8,60 @@ function ProductCard({ product }: { product: Product }) {
   return (
     <div
       ref={ref}
-      className={`bg-card rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-500 border border-border flex flex-col ${
+      className={`bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-500 border border-border flex flex-col ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
     >
-      <h3 className="font-serif text-xl font-semibold text-foreground mb-1">{product.name}</h3>
-      <p className="text-sm text-accent font-medium mb-3">
-        {product.weight} — <span className="text-foreground font-semibold">R${product.price}{product.variants ? "+" : ""}</span>
-      </p>
-      <p className="text-sm text-muted-foreground leading-relaxed mb-3 flex-1">{product.description}</p>
-
-      {product.flavors && (
-        <p className="text-xs text-muted-foreground mb-2">
-          <span className="font-medium text-foreground">Sabores:</span> {product.flavors}
-        </p>
-      )}
-
-      {product.variants && (
-        <div className="flex flex-wrap gap-2 mb-3">
-          {product.variants.map((v) => (
-            <span
-              key={v.weight}
-              className="text-xs bg-muted rounded-full px-3 py-1 text-muted-foreground"
-            >
-              {v.weight}: R${v.price}
-            </span>
-          ))}
+      {product.image && (
+        <div className="aspect-square overflow-hidden">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            loading="lazy"
+          />
         </div>
       )}
+      <div className="p-6 flex flex-col flex-1">
+        <h3 className="font-serif text-xl font-semibold text-foreground mb-1">{product.name}</h3>
+        <p className="text-sm text-accent-foreground font-medium mb-3">
+          {product.weight} — <span className="text-foreground font-semibold">R${product.price}{product.variants ? "+" : ""}</span>
+        </p>
+        <p className="text-sm text-muted-foreground leading-relaxed mb-3 flex-1">{product.description}</p>
 
-      {product.note && (
-        <p className="text-xs text-sage-dark italic mb-4">⚠ {product.note}</p>
-      )}
+        {product.flavors && (
+          <p className="text-xs text-muted-foreground mb-2">
+            <span className="font-medium text-foreground">Sabores:</span> {product.flavors}
+          </p>
+        )}
 
-      <Button variant="catalog" size="sm" asChild className="mt-auto self-start">
-        <a
-          href={getWhatsAppLink(product.name, product.weight, product.price)}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Pedir este item
-        </a>
-      </Button>
+        {product.variants && (
+          <div className="flex flex-wrap gap-2 mb-3">
+            {product.variants.map((v) => (
+              <span
+                key={v.weight}
+                className="text-xs bg-muted rounded-full px-3 py-1 text-muted-foreground"
+              >
+                {v.weight}: R${v.price}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {product.note && (
+          <p className="text-xs text-sage-dark italic mb-4">⚠ {product.note}</p>
+        )}
+
+        <Button variant="catalog" size="sm" asChild className="mt-auto self-start">
+          <a
+            href={getWhatsAppLink(product.name, product.weight, product.price)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Pedir este item
+          </a>
+        </Button>
+      </div>
     </div>
   );
 }
