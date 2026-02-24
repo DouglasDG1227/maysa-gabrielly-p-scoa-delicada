@@ -1,13 +1,24 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Header from "@/components/easter/Header";
+import Hero from "@/components/easter/Hero";
+import About from "@/components/easter/About";
+import CatalogSection from "@/components/easter/CatalogSection";
+import Observations from "@/components/easter/Observations";
+import Footer from "@/components/easter/Footer";
+import WhatsAppFloat from "@/components/easter/WhatsAppFloat";
+import { lembrancinhas, ovosTradicionais } from "@/data/products";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <main className="min-h-screen bg-background">
+      <Header />
+      <Hero />
+      <About />
+      <CatalogSection id="lembrancinhas" title="Lembrancinhas" products={lembrancinhas} />
+      <CatalogSection id="ovos" title="Ovos Tradicionais" products={ovosTradicionais} />
+      <Observations />
+      <Footer />
+      <WhatsAppFloat />
+    </main>
   );
 };
 
